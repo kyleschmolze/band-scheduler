@@ -9,58 +9,35 @@ RSpec.describe Band do
 
   describe '#find_by_slug' do
     it 'returns the band with the given slug' do
-      expect(Band.find_by_slug('beatles')).to be_present
+      # TODO - Make sure the Band.find_by_slug method returns a Band object
     end
 
     it 'returns nil when not found' do
-      expect(Band.find_by_slug('zzz')).to be_nil
+      # TODO - make sure the Band.find_by_slug method returns nil
+      # when given a band slug that doesnt exist
     end
   end
+
+  # TODO - write a test for the Band#generate_slug method
 
   describe '#create' do
     it 'creates a new band' do
       expect {
-        Band.create('Hiatus Kaiyote', 'Neosoul', 'hiatus-kaiyote')
-      }.to change { Band.all.size }.by(1)
+        # the brakets around this line allow us to check a value
+        # *before* and *after* the block is executed
+        # TODO - put a working call to Band.create here
+      }.to change {
+        # TODO What should change by 1 when we call Band.create?
+      }.by(1)
     end
 
     it 'appends the band to the end of the list' do
-      band = Band.create('Hiatus Kaiyote', 'Neosoul', 'hiatus-kaiyote')
-      expect(Band.all.last.name).to eq 'Hiatus Kaiyote'
+      # TODO - call Band.create here, and make sure the new band
+      # is the last one in the Band.all array
     end
   end
 
-  describe 'update_genre_by_slug' do
-    it 'updates the genre of the band with the given slug' do
-      Band.update_genre_by_slug('beatles', 'Psychedelic Rock')
-      expect(Band.find_by_slug('beatles').genre).to eq 'Psychedelic Rock'
-    end
-  end
+  # TODO - write a test for the Band#update_genre_by_slug method
 
-  describe 'the .albums method' do
-    let(:band) do
-      Band.new('The Beatles', 'beatles', 'Rock')
-    end
-
-    it 'returns an array of albums' do
-      albums = band.albums
-      expect(albums).to be_an(Array)
-      expect(albums).to include 'I Saw Her Standing There'
-      expect(albums).to include '1'
-    end
-
-    describe 'when given a min_year' do
-      it 'excludes early albums' do
-        albums = band.albums(2005)
-        expect(albums).not_to include '1'
-      end
-    end
-
-    describe 'when given a max_year' do
-      it 'excludes late albums' do
-        albums = band.albums(nil, 2005)
-        expect(albums).not_to include 'I Saw Her Standing There'
-      end
-    end
-  end
+  # TODO - write a test for the band.albums method
 end

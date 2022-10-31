@@ -13,41 +13,23 @@ RSpec.describe BandsController, type: :request do
   describe '#show' do
     it "shows a band correctly" do
       get "/bands/beatles"
-      band = JSON.parse(response.body).deep_symbolize_keys
-      expect(band).to eq({ name: "The Beatles", genre: 'Rock', slug: 'beatles' })
+      json_response = JSON.parse(response.body).deep_symbolize_keys
+      expect(json_response).to eq({ name: "The Beatles", genre: 'Rock', slug: 'beatles' })
     end
 
     it "shows null when not found" do
-      get "/bands/zzz"
-      expect(response.code).to eq "404"
-      json_response = JSON.parse(response.body).deep_symbolize_keys
-      expect(json_response).to eq({ error: 'Not found' })
+      # TODO - this should be a 404, and return your useful error message
     end
   end
 
   describe '#create' do
     it "creates a band" do
-      post "/bands", params: { name: "The Who", genre: 'Rock' }
-      expect(response.code).to eq "201"
-      band = JSON.parse(response.body).deep_symbolize_keys
-      expect(band).to eq({ name: "The Who", genre: 'Rock', slug: 'the-who' })
-      expect(Band.all.size).to eq 5
+      post "/bands", params: { name: "The Who", genre: 'Rock', slug: 'the-who' }
+      # TODO - check the response, and also check Band.all to make sure it saved!
     end
   end
 
   describe '#update_genre' do
-    it "updates a band" do
-      post "/bands/beatles", params: { genre: 'Psychedelic Rock' }
-      expect(response.code).to eq "200"
-      band = JSON.parse(response.body).deep_symbolize_keys
-      expect(band).to eq({ name: "The Beatles", genre: 'Psychedelic Rock', slug: 'beatles' })
-    end
-
-    it "shows null when not found" do
-      post "/bands/zzz", params: { genre: 'Psychedelic Rock' }
-      expect(response.code).to eq "404"
-      json_response = JSON.parse(response.body).deep_symbolize_keys
-      expect(json_response).to eq({ error: 'Not found' })
-    end
+    # TODO - you're on your own here!
   end
 end
