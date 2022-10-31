@@ -34,4 +34,20 @@ RSpec.describe BandsController, type: :request do
       expect(Band.all.size).to eq 5
     end
   end
+
+  describe '#update_genre' do
+    it "updates a band" do
+      post "/bands/beatles", params: { genre: 'Psychedelic Rock' }
+      expect(response.code).to eq "200"
+      band = JSON.parse(response.body).deep_symbolize_keys
+      expect(band).to eq({ name: "The Beatles", genre: 'Psychedelic Rock', slug: 'beatles' })
+    end
+
+    it "shows null when not found" do
+      post "/bands/zzz", params: { genre: 'Psychedelic Rock' }
+      expect(response.code).to eq "404"
+      json_response = JSON.parse(response.body).deep_symbolize_keys
+      expect(json_response).to eq({ error: 'Not found' })
+    end
+  end
 end
