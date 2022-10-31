@@ -5,7 +5,7 @@ RSpec.describe BandsController, type: :request do
     it "shows all bands" do
       get "/bands"
       bands = JSON.parse(response.body)
-      expect(bands.size).to eq 4
+      expect(bands.size).to be >= 4
       expect(bands[0]["name"]).to eq "The Beatles"
     end
   end
