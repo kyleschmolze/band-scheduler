@@ -13,7 +13,8 @@ class BandsController < ApplicationController
   end
 
   def create
-    @band = Band.create({ name: params[:name], genre: params[:genre] })
+    @band = Band.create(params[:name], params[:genre], nil)
+    @band.generate_slug
     render json: @band, status: 201
   end
 

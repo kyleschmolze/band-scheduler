@@ -22,6 +22,10 @@ class Band
     albums.map { |album| album['strAlbum'] }
   end
 
+  def generate_slug
+    self.slug = name.downcase.gsub(' ', '-')
+  end
+
   def self.all
     @@bands
   end
