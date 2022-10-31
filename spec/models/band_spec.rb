@@ -30,6 +30,13 @@ RSpec.describe Band do
     end
   end
 
+  describe 'update_genre_by_slug' do
+    it 'updates the genre of the band with the given slug' do
+      Band.update_genre_by_slug('beatles', 'Psychedelic Rock')
+      expect(Band.find_by_slug('beatles').genre).to eq 'Psychedelic Rock'
+    end
+  end
+
   describe 'the .albums method' do
     let(:band) do
       Band.new('The Beatles', 'beatles', 'Rock')

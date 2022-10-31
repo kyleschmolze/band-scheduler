@@ -35,7 +35,7 @@ class Band
   def self.update_genre_by_slug(slug, new_genre)
     band = self.find_by_slug slug
     return nil unless band
-    band[:genre] = new_genre
+    band.genre = new_genre
     band
   end
 
