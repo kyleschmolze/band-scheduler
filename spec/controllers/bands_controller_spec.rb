@@ -9,9 +9,9 @@ RSpec.describe BandsController, type: :request do
   end
 
   it "shows a band correctly" do
-    get "/bands/the-beatles"
+    get "/bands/beatles"
     band = JSON.parse(response.body).deep_symbolize_keys
-    expect(band).to eq({ name: "The Beatles", genre: 'Rock' })
+    expect(band).to eq({ name: "The Beatles", genre: 'Rock', slug: 'beatles' })
   end
 
   it "shows null when not found" do
